@@ -1,0 +1,29 @@
+{% extends "user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}
+Editing Post
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="header">
+	<h1 style="color:lightskyblue">Edit</h1>
+	<hr />
+	</div>
+	<div class="page-header">
+		{{wtf.quick_form(form)}}
+	</div>
+	<div>
+		<a href="{{url_for('.index')}}">
+			<span class="label label-default">Quit</span>
+		</a>
+	</div>
+</div>			
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}								 
+{% endblock %}

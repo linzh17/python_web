@@ -1,0 +1,37 @@
+{% extends "user.html" %}
+
+{% block title %}
+Post
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<ul class="posts">
+			{% for post in posts %}
+			<li class = "posts">
+				<div class="post-author">
+					<h1>author:{{ post.author.username }}</h1>
+				</div>
+				<div class="post-body">
+					<pre>{{ post.body }}</pre>
+				</div>
+				<div>
+					<h1 style="color:red">do you want to delete it?</h1>
+				</div>		
+				<div class="post-footer">
+					<a href="{{url_for('.delete_sure',id=post.id)}}">
+						<span class="label label-default">Sure</span>
+					</a>
+					<a href="{{url_for('.index')}}">
+						<span class="label label-default">Quit</span>
+					</a>
+					<hr />
+				</div>		
+			</li>
+			{% endfor %}
+		</ul>
+		
+	</div>
+</div>
+{% endblock %}				

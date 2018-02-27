@@ -1,0 +1,57 @@
+{% extends "user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}
+{% if current_user.username %}
+{{current_user.username}}'s blog
+{% else %}
+blog
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		{% if current_user.can(Permission.WRITE_ARTICLES) %}
+		{{wtf.quick_form(form)}}
+		{% endif %}
+	</div>
+</div>
+<ul class="posts">
+	{% for post in posts %}
+	<li class = "posts">
+		<div class="post-author">
+			<h1>author:{{ post.author.username }}</h1>
+		</div>
+		<div class="post-body">
+			<pre rows = "4" cols = "20">{{ post.body }}</pre>
+		</div>
+		<div class="post-footer">
+			<a href="{{url_for('.post',id=post.id)}}">
+				<span class="label label-default" style="background-color: green">Link</span>
+			</a>
+			{% if  current_user == post.author %}
+			<a href="{{url_for('.edit',id=post.id)}}">
+				<span class="label label-default" style="background-color: skyblue">Edit</span>
+			</a>
+			<a href="{{url_for('.delete',id=post.id)}}">
+				<span class="label label-default" style="background-color: orangered">Del</span>
+			</a>
+			{% endif %}
+			<hr />
+		</div>		
+	</li>
+	{% endfor %}
+</ul>
+{% if pagination %}
+<div class="pagination" >
+    {{ macros.pagination_widget(pagination, '.index') }}
+</div>
+{% endif %}				
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}								 
+{% endblock %}
