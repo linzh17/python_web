@@ -1,0 +1,17 @@
+Flask
+Flask-Bootstrap
+Flask-SQLALChemy
+Flask-Script
+Flask-WTF
+Flask-Migrate
+Jinja2
+SQLALChemy
+WTForms
+Werkzeug
+Flask-Login
+Forgerypy
+Flask-Pagedown
+Markdown
+Bleach
+mysql-connector-python
+
